@@ -1,0 +1,318 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XWMFDM1WRX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XWMFDM1WRX');
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VKF0XQGBEN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      const gtag = function() { dataLayer.push(arguments); };
+      gtag("js", new Date());
+      gtag("config", "G-VKF0XQGBEN");
+    </script>
+    <meta name="robots" content="noindex">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>V-Watch - News</title>
+    <meta name="description" content="Why does this page exist though">
+
+    <link rel="icon" href="/images/vplaza.webp"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/vplaza.webp"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/vplaza.webp"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/vplaza.webp"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6.3.4/animations/shift-away-subtle.css">
+    <script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.4/dist/tippy-bundle.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slugify@1.6.6/slugify.min.js"></script>
+    <script src="../cachedFetch.js"></script>
+    <script src="../utils.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #121212, #1a1a1a);
+            color: #e0e0e0;
+        }
+
+        header {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            background: linear-gradient(to right, #3399ff, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 8px rgba(51, 153, 255, 0.8), 0 0 12px rgba(0, 191, 255, 0.8);
+        }
+
+        .search-container {
+            margin: 15px auto;
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        #search-input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            background: rgba(30, 30, 30, 0.7);
+            color: #e0e0e0;
+            backdrop-filter: blur(5px);
+        }
+
+        #search-button {
+            padding: 12px 25px;
+            background: linear-gradient(to right, #3399ff, #00bfff);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 25px auto;
+        }
+
+        #videoGrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            #videoGrid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 960px) {
+            #videoGrid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .videoItem {
+            text-align: center;
+            cursor: pointer;
+            background-color: #202020;
+            border-radius: 4px;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            transition: transform .3s;
+            display: flex;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .videoItem:hover {
+            transform: translateY(-5px);
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thumbnail img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        h3 {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        p {
+            color: #999;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .playIcon {
+            opacity: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Slightly transparent background */
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            transition: opacity .3s;
+            display: flex;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .videoItem:hover .playIcon {
+            opacity: 1;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        .modal {
+            text-align: center;
+            background-color: #202020;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 800px;
+            padding: 20px;
+            display: flex;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px #0003;
+        }
+
+        @media (max-width: 600px) {
+            .modal {
+                width: 300px;
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 960px) {
+            .modal {
+                width: 450px;
+            }
+        }
+
+        .vaplayer {
+            width: 640px;
+            height: 360px;
+        }
+
+        @media (max-width: 600px) {
+            .vaplayer {
+                width: 390px;
+            }
+        }
+
+        #close-button {
+            color: #fff;
+            cursor: pointer;
+            background-color: #686868;
+            border: none;
+            border-radius: 2px;
+            margin-left: 10px;
+            padding: 8px 15px;
+            transition: background-color .3s;
+        }
+
+        #close-button:hover {
+            background-color: #5a5a5a;
+        }
+
+        img.emoji {
+            vertical-align: -.1em;
+            width: 1em;
+            height: 1em;
+            margin: 0 .05em 0 .1em;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>V-Watch - News</h1>
+    </header>
+    <main>
+        <div id="videoGrid"></div>
+    </main>
+    <script>
+        let videoGrid = document.getElementById("videoGrid");
+        newsapi().then(e => {
+            if ("ok" == e.status) {
+                e = e.articles.filter(e => "[Removed]" !== e.title).filter(e => null != e.urlToImage).sort((e, t) => new Date(t.publishedAt) - new Date(e.publishedAt));
+                e.forEach(e => {
+                    var articleData = {
+                        source: e.source.name ? e.source.name.split(".")[0] : "no source",
+                        title: e.title || "no title",
+                        poster: e.urlToImage,
+                        published: new Date(e.publishedAt).toDateString(),
+                        reference: e.url || "https://google.com",
+                        content: e.description || ""
+                    };
+                    var card = document.createElement("div");
+                    card.classList.add("videoItem");
+                    var link = document.createElement("a");
+                    link.classList.add("thumbnail");
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    link.href = articleData.reference;
+                    let imgElement = document.createElement("img");
+                    imgElement.loading = "lazy";
+                    imgElement.src = articleData.poster;
+                    imgElement.addEventListener("error", () => {
+                        imgElement.src = "../previews/no-episode.png";
+                    });
+                    link.appendChild(imgElement);
+                    var sourceNameElement = document.createElement("div");
+                    sourceNameElement.classList.add("dateOverlay");
+                    sourceNameElement.innerText = articleData.source;
+                    link.appendChild(sourceNameElement);
+                    var publishedDateElement = document.createElement("div");
+                    publishedDateElement.classList.add("timeOverlay");
+                    publishedDateElement.innerText = articleData.published;
+                    link.appendChild(publishedDateElement);
+                    var titleElement = document.createElement("h3");
+                    titleElement.innerText = articleData.title;
+                    var descriptionElement = document.createElement("p");
+                    descriptionElement.innerText = articleData.content;
+                    card.appendChild(link);
+                    card.appendChild(titleElement);
+                    card.appendChild(descriptionElement);
+                    videoGrid.appendChild(card);
+                });
+            }
+        });
+    </script>
+    <!-- Cloudflare Pages Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "e70a405a52eb428db253911f5e45d760"}'></script>
+    <!-- Cloudflare Pages Analytics -->
+</body>
+</html>
