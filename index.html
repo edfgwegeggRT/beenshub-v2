@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Beenshub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Set favicon -->
+    <link rel="icon" href="/images/B.png" type="image/png">
     <style>
         * {
             margin: 0;
@@ -90,12 +92,11 @@
             text-align: center;
         }
 
+        /* Replace "V" text with image */
         .logo-v {
-            font-size: 150px;
-            font-weight: bold;
-            background: linear-gradient(45deg, #8e8dfd, #60f4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            width: 150px;  /* Set the width for the image */
+            height: auto;  /* Maintain aspect ratio */
+            background: none; /* Remove background gradient */
         }
 
         .logo-text {
@@ -144,7 +145,8 @@
     </div>
 
     <div class="logo-area">
-        <div class="logo-v">V</div>
+        <!-- Replace V with image -->
+        <img src="/images/B.png" class="logo-v" alt="Logo">
         <div class="logo-text">BEENSHUB</div>
     </div>
 
