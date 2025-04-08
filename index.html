@@ -124,20 +124,24 @@
         .popup {
             position: absolute;
             top: 20px;
-            left: 20px;
+            left: -350px;
             width: 300px;
-            background-color: #ffcc00;
-            color: black;
+            background-color: #007BFF;
+            border: 2px solid #0056b3;
+            color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             z-index: 3;
-            transform: translateY(-100%);
             transition: transform 0.5s ease-in-out;
         }
 
         .popup.show {
-            transform: translateY(0);
+            transform: translateX(350px);
+        }
+
+        .popup.hide {
+            transform: translateX(-350px);
         }
 
         .cart-icon {
@@ -188,8 +192,8 @@
         popup.classList.add('show');
 
         setTimeout(() => {
-            popup.classList.remove('show');
-        }, 5000);
+            popup.classList.add('hide');
+        }, 3000);
     </script>
 
 </body>
