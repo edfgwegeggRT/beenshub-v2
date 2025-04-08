@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Beenshub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Set favicon -->
     <link rel="icon" href="/images/B2.png" type="image/png">
     <style>
         * {
@@ -60,26 +59,26 @@
         .sidebar {
             position: relative;
             z-index: 2;
-            background-color: #69a8db; /* Sidebar color */
-            width: 80px; /* Fixed width for sidebar */
-            height: 100vh; /* Full height for sidebar */
+            background-color: #69a8db;
+            width: 80px;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 1rem; /* Top padding */
-            border-radius: 0 20px 20px 0; /* Rounded corners */
+            padding-top: 1rem;
+            border-radius: 0 20px 20px 0;
         }
 
         .sidebar a {
-            color: #fff; /* White icon color */
-            text-decoration: none; /* Remove underline */
-            display: block; /* Block display */
-            margin: 1.5rem 0; /* Spacing for sidebar items */
-            text-align: center; /* Center the icon */
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin: 1.5rem 0;
+            text-align: center;
         }
 
         .sidebar .bi {
-            font-size: 2rem; /* Font size for icons */
+            font-size: 2rem;
             cursor: pointer;
         }
 
@@ -95,12 +94,11 @@
             align-items: center;
         }
 
-        /* New text styling */
         .logo-text {
-            font-size: 4rem; /* Increased font size for "BH" */
-            color: blue; /* Blue color for "BH" */
+            font-size: 4rem;
+            color: blue;
             font-weight: bold;
-            margin-top: 20px; /* Space below the text */
+            margin-top: 20px;
         }
 
         .links-box {
@@ -123,6 +121,25 @@
             text-decoration: none;
         }
 
+        .popup {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 300px;
+            background-color: #ffcc00;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            z-index: 3;
+            transform: translateY(-100%);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .popup.show {
+            transform: translateY(0);
+        }
+
         .cart-icon {
             display: none;
         }
@@ -132,17 +149,15 @@
 
     <div class="rain" id="rain"></div>
 
-    <!-- Sidebar -->
     <div class="sidebar">
-        <a href="/"><i class="bi bi-house-door-fill"></i></a> <!-- Home link -->
-        <a href="/tutorials"><i class="bi bi-tv"></i></a> <!-- AI link -->
-        <a href="/games"><i class="bi bi-controller"></i></a> <!-- Game link -->
-        <a href="/apps"><i class="bi bi-grid"></i></a> <!-- Apps link -->
-        <a href="/search"><i class="bi bi-search"></i></a> <!-- Search link -->
+        <a href="/"><i class="bi bi-house-door-fill"></i></a>
+        <a href="/tutorials"><i class="bi bi-tv"></i></a>
+        <a href="/games"><i class="bi bi-controller"></i></a>
+        <a href="/apps"><i class="bi bi-grid"></i></a>
+        <a href="/search"><i class="bi bi-search"></i></a>
     </div>
 
     <div class="logo-area">
-        <!-- Only the blue "BH" text -->
         <div class="logo-text">BH</div>
     </div>
 
@@ -153,6 +168,8 @@
         <a href="https://example3.com">https://example3.com</a>
         <div class="note">LINKS COME WHEN ALL GET BLOCKED</div>
     </div>
+
+    <div class="popup" id="popup">Hate me all you want but I'm back, no AI this time</div>
 
     <script>
         const rainContainer = document.getElementById('rain');
@@ -166,6 +183,13 @@
             drop.style.animationDelay = `${Math.random() * 2}s`;
             rainContainer.appendChild(drop);
         }
+
+        const popup = document.getElementById('popup');
+        popup.classList.add('show');
+
+        setTimeout(() => {
+            popup.classList.remove('show');
+        }, 5000);
     </script>
 
 </body>
