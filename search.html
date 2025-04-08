@@ -1,125 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proxy</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Beenshub</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-    <script>
-        function redirect() {
-            const input = document.getElementById('input').value.trim();
-            let redirectUrl = '';
-
-            if (input.startsWith('https://')) {
-                redirectUrl = `/active/embed.html?url=${encodeURIComponent(input)}`;
-            } else {
-                const searchUrl = `https://duckduckgo.com/?t=h_&q=${encodeURIComponent(input)}&ia=web`;
-                redirectUrl = `/active/embed.html?url=${encodeURIComponent(searchUrl)}`;
-            }
-
-            window.location.href = redirectUrl;
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                redirect();
-            }
-        }
-    </script>
+    <link rel="icon" href="/images/B2.png" type="image/png">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #000; /* Set a solid background */
-            color: #ffffff; /* White text color */
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        .rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .drop {
+            position: absolute;
+            bottom: 100%;
+            width: 3px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
         }
 
         .sidebar {
-            background-color: #69a8db; /* Sidebar color */
-            height: 100vh; /* Full height for sidebar */
+            position: relative;
+            z-index: 2;
+            background-color: #69a8db;
+            width: 80px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 1rem;
+            border-radius: 0 20px 20px 0;
         }
 
         .sidebar a {
-            color: #fff; /* White icon color */
+            color: #fff;
             text-decoration: none;
-            text-align: center;
-            font-size: 1.5rem; /* Font size for icons */
-            padding: 15px 0; /* Spacing for sidebar items */
             display: block;
+            margin: 1.5rem 0;
+            text-align: center;
         }
 
-        .sidebar a:hover {
-            background-color: rgba(255, 255, 255, 0.1); /* Highlight on hover */
+        .sidebar .bi {
+            font-size: 2rem;
+            cursor: pointer;
         }
 
-        h2 {
-            margin-top: 80px; /* Space below the navbar */
-            text-align: center; /* Center the heading */
+        .logo-area {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        input {
-            width: 100%; /* Full-width input */
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
+        .logo-v {
+            width: 150px;
+            height: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            color: #9dc1ff;
+            font-weight: 600;
             margin-top: 20px;
         }
 
-        button {
-            margin-top: 10px;
-            width: 100%; /* Full-width button */
-            padding: 10px;
-            font-size: 16px;
-            background: linear-gradient(135deg, #ffcc00, #ff7f30); /* Button gradient */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
+        .links-box {
+            position: absolute;
+            z-index: 2;
+            right: 30px;
+            top: 30%;
+            background-color: #84c2f4;
+            padding: 30px;
+            border-radius: 20px;
+            color: #000;
+            width: 230px;
+            font-weight: bold;
         }
 
-        button:hover {
-            background: #ff7f30; /* Darker orange on hover */
+        .links-box a {
+            display: block;
+            color: #000;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .cart-icon {
+            display: none;
         }
     </style>
 </head>
-
 <body>
-    <div class="d-flex">
-        <!-- Sidebar -->
-        <div class="sidebar flex-shrink-0">
-            <nav class="nav flex-column">
-                <a href="/index" class="nav-link"><i class="bi bi-house-door-fill"></i> Home</a>
-                <a href="/tutorials" class="nav-link"><i class="bi bi-tv"></i> AI</a>
-                <a href="/games" class="nav-link"><i class="bi bi-controller"></i> Games</a>
-                <a href="/apps" class="nav-link"><i class="bi bi-grid"></i> Apps</a>
-                <a href="/sports" class="nav-link"><i class="bi bi-trophy"></i> Sports</a>
-                <a href="/search" class="nav-link"><i class="bi bi-search"></i> Pro_y</a>
-            </nav>
-        </div>
 
-        <!-- Main Content -->
-        <div class="flex-grow-1">
-            <nav class="nav bg-dark text-white p-2">
-                <a href="/index" class="nav-link text-white"><i class="bi bi-house-door-fill"></i> Home</a>
-                <a href="/ai" class="nav-link text-white"><i class="bi bi-robot"></i> AI</a>
-                <a href="/games" class="nav-link text-white"><i class="bi bi-controller"></i> Games</a>
-                <a href="/apps" class="nav-link text-white"><i class="bi bi-grid"></i> Apps</a>
-                <a href="/search" class="nav-link text-white"><i class="bi bi-search"></i> Pro_y</a>
-            </nav>
+    <div class="rain" id="rain"></div>
 
-            <h2>Type a URL (https://...) or a Search Query</h2>
-            <input type="text" id="input" onkeypress="handleKeyPress(event)" placeholder="Enter URL or search..." />
-            <button onclick="redirect()">Go</button>
-        </div>
+    <div class="sidebar">
+        <a href="/"><i class="bi bi-house-door-fill"></i></a>
+        <a href="/tutorials"><i class="bi bi-tv"></i></a>
+        <a href="/games"><i class="bi bi-controller"></i></a>
+        <a href="/apps"><i class="bi bi-grid"></i></a>
+        <a href="/search"><i class="bi bi-search"></i></a>
     </div>
 
-    <!-- Bootstrap JS (Optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    <div class="logo-area">
+        <img src="/images/B2.png" class="logo-v" alt="Logo">
+        <div class="logo-text">BEENSHUB</div>
+    </div>
 
+    <div class="links-box">
+        <div class="mb-2">LINKS!</div>
+        <a href="https://example1.com">https://example1.com</a>
+        <a href="https://example2.com">https://example2.com</a>
+        <a href="https://example3.com">https://example3.com</a>
+        <div class="note">LINKS COME WHEN ALL GET BLOCKED</div>
+    </div>
+
+    <script>
+        const rainContainer = document.getElementById('rain');
+        const numDrops = 120;
+
+        for (let i = 0; i < numDrops; i++) {
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            drop.style.left = `${Math.random() * 100}%`;
+            drop.style.animationDuration = `${0.5 + Math.random() * 1.5}s`;
+            drop.style.animationDelay = `${Math.random() * 2}s`;
+            rainContainer.appendChild(drop);
+        }
+    </script>
+
+</body>
 </html>
