@@ -758,8 +758,6 @@
             pointer-events: none;
             transition: opacity 0.3s ease;
         }
-
-        /* additional styles from your previous code... */
     </style>
 </head>
 
@@ -829,7 +827,7 @@
         <div id="iframe-modal">
             <div class="iframe-modal-header">
                 <h4 style="background: linear-gradient(45deg, #fff, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0;">
-                    Vplaza</h4>
+                    Beenshub</h4>
                 <div id="close-iframe-modal">
                     <div></div>
                     <div></div>
@@ -1161,8 +1159,8 @@ function openGameInIframe(url) {
 }
 
 closeIframeModalBtn.addEventListener('click', function() {
-    iframeModal.style.display = 'none'; // Hide the modal
-    gameIframe.src = ''; // Clear the src to stop the game
+    iframeModal.style.display = 'none'; 
+    gameIframe.src = ''; 
 });
 
 let currentSlide = 0;
