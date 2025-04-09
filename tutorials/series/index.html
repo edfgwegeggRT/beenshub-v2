@@ -11,8 +11,34 @@
             font-family: 'IBM Plex Mono', monospace;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #001f3f, #003366); 
+            background: linear-gradient(to bottom, #001f3f, #003366);
             color: #e0e0e0;
+        }
+
+        .sidebar {
+            position: fixed;
+            z-index: 2;
+            background-color: #69a8db;
+            width: 80px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 1rem;
+            border-radius: 0 20px 20px 0;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .sidebar .bi {
+            font-size: 2rem;
+            cursor: pointer;
         }
 
         header {
@@ -53,7 +79,7 @@
 
         #search-button {
             padding: 12px 25px;
-            background: linear-gradient(to right, #3399ff, #00bfff); 
+            background: linear-gradient(to right, #3399ff, #00bfff);
             color: white;
             border: none;
             border-radius: 6px;
@@ -63,7 +89,7 @@
         }
 
         #search-button:hover {
-            background: linear-gradient(to right, #00bfff, #3399ff); 
+            background: linear-gradient(to right, #00bfff, #3399ff);
         }
 
         .container {
@@ -108,7 +134,7 @@
         .tv-card h2 {
             margin-top: 0;
             font-size: 1.2em;
-            color: #00bfff; 
+            color: #00bfff;
             text-shadow: 0 0 8px rgba(51, 153, 255, 0.8);
         }
 
@@ -118,7 +144,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
-            -webkit-line-clamp: 3; 
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             text-shadow: 0 0 3px rgba(255, 255, 255, 0.1);
         }
@@ -166,7 +192,7 @@
         }
 
         .popup-close:hover {
-            color: #00ccff; 
+            color: #00ccff;
         }
 
         .popup iframe {
@@ -189,57 +215,28 @@
             width: 40px;
             height: 40px;
             animation: spin 0.8s linear infinite;
-            margin: 0 auto; 
+            margin: 0 auto;
         }
 
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
             }
-
             100% {
                 transform: rotate(360deg);
             }
-        }
-
-        /* Sidebar styles */
-        .sidebar {
-            position: fixed;
-            top: 70px; 
-            z-index: 200; 
-            background-color: #69a8db; 
-            width: 80px; 
-            height: calc(100vh - 70px); 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 1rem; 
-            border-radius: 0 20px 20px 0; 
-
-        .sidebar a {
-            color: #fff; 
-            text-decoration: none;
-            display: block;
-            margin: 1.5rem 0; 
-            text-align: center; 
-        }
-
-        .sidebar .bi {
-            font-size: 2rem; 
-            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
     <div class="sidebar">
-        <a href="/"><i class="bi bi-house-door-fill"></i></a> 
+        <a href="/"><i class="bi bi-house-door-fill"></i></a>
         <a href="/tutorials.html"><i class="bi bi-tv"></i></a>
-        <a href="/gms.html"><i class="bi bi-controller"></i></a> 
-        <a href="/apps.html"><i class="bi bi-grid"></i></a> 
-        <a href="/search.html"><i class="bi bi-search"></i></a> 
+        <a href="/gms.html"><i class="bi bi-controller"></i></a>
+        <a href="/apps.html"><i class="bi bi-grid"></i></a>
+        <a href="/search.html"><i class="bi bi-search"></i></a>
     </div>
-
     <header>
         <h1>Beenshub TV Shows</h1>
         <div class="search-container">
@@ -248,8 +245,7 @@
         </div>
     </header>
     <div class="container">
-        <div class="tv-grid" id="tv-grid">
-        </div>
+        <div class="tv-grid" id="tv-grid"></div>
         <div id="loading-indicator"><div class="spinner"></div>Loading...</div>
     </div>
 
