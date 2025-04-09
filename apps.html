@@ -1,0 +1,722 @@
+<link rel="icon" href="/favicons/vplaza.ico">
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <title>Beenshub</title>
+    <style>
+        :root {
+            --primary-glow: rgba(173, 216, 230, 0.7);
+            --secondary-glow: rgba(173, 216, 230, 0.5);
+            --border-color: #add8e6;
+            --text-color: #b0e0e6;
+            --bg-card: rgba(30, 30, 30, 0.7);
+            --bg-hover: rgba(40, 40, 40, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            color: var(--text-color);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 30% 30%, rgba(173, 216, 230, 0.05) 0%, transparent 60%),
+                              radial-gradient(circle at 70% 70%, rgba(173, 216, 230, 0.05) 0%, transparent 60%);
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(173, 216, 230, 0.2);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #00a0ff, #00ccff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(173, 216, 230, 0.5);
+        }
+
+        .search-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            max-width: 450px;
+            z-index: 1000;
+            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .search-container.active {
+            top: 80px;
+            bottom: auto;
+        }
+
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+            height: 40px;
+            overflow: hidden;
+            border-radius: 8px;
+            background: rgba(25, 25, 25, 0.7);
+            border: 1px solid rgba(173, 216, 230, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(173, 216, 230, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .search-wrapper:hover,
+        .search-wrapper:focus-within {
+            background: rgba(30, 30, 30, 0.9);
+            border-color: rgba(173, 216, 230, 0.5);
+            box-shadow: 0 0 20px rgba(173, 216, 230, 0.25);
+        }
+
+        .search-input {
+            width: 100%;
+            height: 100%;
+            padding: 0 15px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: rgba(173, 216, 230, 0.5);
+            font-weight: 400;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-button {
+            background: none;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-button:hover {
+            color: rgba(173, 216, 230, 0.7);
+        }
+
+        .main-content {
+            margin-top: 120px;
+            padding: 25px 5%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 0 100px 0;
+        }
+
+        .game {
+            position: relative;
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--bg-card);
+            border: 1px solid rgba(173, 216, 230, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.35s ease;
+        }
+
+        .game:hover {
+            transform: translateY(-5px);
+            border-color: rgba(173, 216, 230, 0.6);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3),
+                        0 0 15px rgba(173, 216, 230, 0.3);
+        }
+
+        .game::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top,
+                rgba(0, 0, 0, 0.8) 0%,
+                rgba(0, 0, 0, 0.3) 40%,
+                transparent 100%);
+            opacity: 0.7;
+            transition: opacity 0.35s ease;
+            z-index: 1;
+        }
+
+        .game:hover::before {
+            opacity: 0.4;
+        }
+
+        .game img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .game:hover img {
+            transform: scale(1.1);
+        }
+
+        .game-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            text-align: center;
+            z-index: 2;
+            transform: translateY(0);
+            transition: transform 0.35s ease;
+        }
+
+        .game:hover .game-name {
+            transform: translateY(-5px);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: rgba(25, 25, 25, 0.95);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 500px;
+            padding: 25px;
+            box-shadow: 0 0 30px rgba(173, 216, 230, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-game-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-right: 15px;
+            border: 1px solid rgba(173, 216, 230, 0.3);
+        }
+
+        .modal-game-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #fff, #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            border: none;
+            outline: none;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #00a0ff, #00ccff);
+            color: #000;
+            box-shadow: 0 5px 15px rgba(173, 216, 230, 0.3);
+        }
+
+        .play-btn:hover {
+            background: linear-gradient(135deg, #00ccff, #00a0ff);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(173, 216, 230, 0.4);
+        }
+
+        .cancel-btn {
+            background: rgba(40, 40, 40, 0.8);
+            color: #fff;
+            border: 1px solid rgba(173, 216, 230, 0.3);
+        }
+
+        .cancel-btn:hover {
+            background: rgba(60, 60, 60, 0.8);
+            border-color: rgba(173, 216, 230, 0.5);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(40, 40, 40, 0.8);
+            border: 1px solid rgba(173, 216, 230, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .close-modal:hover {
+            background: rgba(60, 60, 60, 0.8);
+            border-color: rgba(173, 216, 230, 0.5);
+        }
+
+        .close-modal:before,
+        .close-modal:after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 2px;
+            background: var(--text-color);
+        }
+
+        .close-modal:before {
+            transform: rotate(45deg);
+        }
+
+        .close-modal:after {
+            transform: rotate(-45deg);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 85%;
+            margin: 40px auto;
+            margin-top: 100px;
+            border: 4px solid lightblue;
+            border-radius: 15px;
+        }
+
+        .carousel-slide {
+            position: relative;
+            display: block;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-button {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: rgba(173, 216, 230, 0.7);
+            box-shadow: 0 0 20px 5px rgba(173, 216, 230, 0.5),
+                        0 0 50px 10px rgba(173, 216, 230, 0.2),
+                        0 0 100px 20px rgba(173, 216, 230, 0.1);
+            color: #000;
+            padding: 20px 90px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-family: poppins;
+            font-weight: bold;
+        }
+
+        .play-button:hover {
+            background-color: #80cfd4;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin-bottom: 20px;
+            margin-right: 20px;
+        }
+
+        .prev-button,
+        .next-button {
+            background-color: rgba(173, 216, 230, 0.5);
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .prev-button:hover,
+        .next-button:hover {
+            background-color: rgba(173, 216, 230, 0.7);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .search-container {
+                width: 85%;
+            }
+
+            .search-container.active {
+                top: 110px;
+            }
+
+            .main-content {
+                margin-top: 120px;
+                padding: 15px 3%;
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 15px;
+            }
+
+            .game-name {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+
+            .modal-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .modal-game-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+
+        #iframe-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 1);
+            z-index: 3000;
+            flex-direction: column;
+        }
+
+        .iframe-modal-header {
+            background: linear-gradient(to right, lightblue, lightblue);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        #close-iframe-modal {
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        #close-iframe-modal div {
+            width: 15px;
+            height: 2px;
+            background: #fff;
+            position: absolute;
+        }
+
+        #close-iframe-modal div:first-child {
+            transform: rotate(45deg);
+        }
+
+        #close-iframe-modal div:last-child {
+            transform: rotate(-45deg);
+        }
+
+        #game-iframe {
+            flex-grow: 1;
+            width: 100%;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="title"><i class="bi bi-duck"></i> Beenshub</div>
+        <nav class="nav">
+            <a href="/" class="nav-button">Home</a>
+            <a href="/gms.html" class="nav-button">Games</a>
+            <a href="/apps.html" class="nav-button">Apps</a>
+                 <a href="/search.html" class="nav-button">Pro_y</a>
+        </nav>
+    </header>
+
+    <div class="search-container" id="search-container">
+        <div class="search-wrapper">
+            <input type="text" class="search-input" id="search-input" placeholder="Search for your favorites">
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="game-modal">
+        <div class="modal-content">
+            <div class="close-modal" id="close-modal"></div>
+            <div class="modal-header">
+                <div class="modal-game-icon">
+                    <img id="modal-game-img" src="" alt="Game">
+                </div>
+                <h2 class="modal-title" id="modal-game-title">Game Title</h2>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn play-btn" id="play-game-btn">PLAY NOW</button>
+                <button class="modal-btn cancel-btn" id="cancel-game-btn">CANCEL</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="iframe-modal">
+        <div class="iframe-modal-header">
+            <h4 style="background: linear-gradient(45deg, #fff, #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0;">
+               Beenshub</h4>
+            <div id="close-iframe-modal">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <iframe id="game-iframe" src=""></iframe>
+    </div>
+
+    <main class="main-content">
+        <div class="grid" id="game-grid">
+            <div class="game" data-name="Vs Code" data-url="https://jsitor.com">
+                <img src="images/vscode.png" alt="VsCode">
+                <div class="game-name">Vs Code</div>
+            </div>
+            <div class="game" data-name="Twitch" data-url="https://twitch.com">
+                <img src="images/twitch.png" alt="twitch">
+                <div class="game-name">Twitch</div>
+            </div>
+            <div class="game" data-name="Tiktok" data-url="https://tiktok.com">
+                <img src="images/tiktok.png" alt="tiktok">
+                <div class="game-name">Tiktok</div>
+            </div>
+            <div class="game" data-name="Chat GPT" data-url="https://vplaza.org/ai">
+                <img src="images/chatgpt.png" alt="GPT">
+                <div class="game-name">Chat GPT</div>
+            </div>
+            <div class="game" data-name="Thirty Dollar Website" data-url="https://thirtydollar.website">
+                <img src="images/thirtysite.jpg" alt="tdw">
+                <div class="game-name">Thirty Dollar Website</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const searchContainer = document.getElementById('search-container');
+        const gameElements = document.querySelectorAll('.game');
+        const gameModal = document.getElementById('game-modal');
+        const modalGameTitle = document.getElementById('modal-game-title');
+        const modalGameImg = document.getElementById('modal-game-img');
+        const closeModalBtn = document.getElementById('close-modal');
+        const playGameBtn = document.getElementById('play-game-btn');
+        const cancelGameBtn = document.getElementById('cancel-game-btn');
+        const iframeModal = document.getElementById('iframe-modal');
+        const closeIframeModalBtn = document.getElementById('close-iframe-modal');
+        const gameIframe = document.getElementById('game-iframe');
+
+        let selectedGameUrl = '';
+
+        searchInput.addEventListener('focus', function () {
+            searchContainer.classList.add('active');
+        });
+
+        searchInput.addEventListener('blur', function () {
+            if (searchInput.value.trim() === '') {
+                searchContainer.classList.remove('active');
+            }
+        });
+
+        searchInput.addEventListener('input', function () {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            gameElements.forEach(game => {
+                const gameName = game.getAttribute('data-name').toLowerCase();
+                if (gameName.includes(searchTerm)) {
+                    game.classList.remove('hidden');
+                } else {
+                    game.classList.add('hidden');
+                }
+            });
+        });
+
+        gameElements.forEach(game => {
+            game.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const gameName = this.getAttribute('data-name');
+                const gameUrl = this.getAttribute('data-url');
+                const gameImg = this.querySelector('img').src;
+                selectedGameUrl = gameUrl;
+
+                modalGameTitle.textContent = gameName;
+                modalGameImg.src = gameImg;
+                gameModal.classList.add('active');
+            });
+        });
+
+        function closeModal() {
+            gameModal.classList.remove('active');
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelGameBtn.addEventListener('click', closeModal);
+
+        playGameBtn.addEventListener('click', function () {
+            openGameInIframe(selectedGameUrl);
+        });
+
+        function openGameInIframe(url) {
+            iframeModal.style.display = 'flex';
+            gameIframe.src = `/active/embed.html?url=${url}`;
+        }
+
+        closeIframeModalBtn.addEventListener('click', function () {
+            iframeModal.style.display = 'none';
+            gameIframe.src = '';
+        });
+    </script>
+</body>
+
+</html>
