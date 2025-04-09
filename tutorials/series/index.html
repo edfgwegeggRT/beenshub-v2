@@ -17,7 +17,7 @@
 
         .sidebar {
             position: fixed;
-            z-index: 2;
+            z-index: 1000; /* Higher z-index to overlay content */
             background-color: #69a8db;
             width: 80px;
             height: 100vh;
@@ -26,6 +26,8 @@
             align-items: center;
             padding-top: 1rem;
             border-radius: 0 20px 20px 0;
+            top: 0; /* Align to top */
+            left: 0; /* Keep it on the left */
         }
 
         .sidebar a {
@@ -47,9 +49,8 @@
             color: white;
             padding: 15px 0;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: relative; /* Change to relative */
+            z-index: 10; /* Set z-index less than the sidebar */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
 
@@ -232,10 +233,10 @@
 <body>
     <div class="sidebar">
         <a href="/"><i class="bi bi-house-door-fill"></i></a>
-        <a href="/tutorials.html"><i class="bi bi-tv"></i></a>
-        <a href="/gms.html"><i class="bi bi-controller"></i></a>
-        <a href="/apps.html"><i class="bi bi-grid"></i></a>
-        <a href="/search.html"><i class="bi bi-search"></i></a>
+        <a href="/tutorials"><i class="bi bi-tv"></i></a>
+        <a href="/games"><i class="bi bi-controller"></i></a>
+        <a href="/apps"><i class="bi bi-grid"></i></a>
+        <a href="/search"><i class="bi bi-search"></i></a>
     </div>
     <header>
         <h1>Beenshub TV Shows</h1>
